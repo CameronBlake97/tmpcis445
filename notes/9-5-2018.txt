@@ -1,0 +1,18 @@
+0 -> fs (file system > coolthings w/ files)  - readfile( -> obj - callback later
+      ^                                 ret object^          ^ function read synchronously
+ library object < Node.js                                 event queue
+ 
+ 
+ js -> interpreter -> v8 -> interpreter
+            
+            
+let - variables
+const - immutable (things that do not change)
+
+
+SEE NODE API DOCUMENTATION 
+
+callback(null, "read the file");
+
+
+overhead - will add time to asnychronous programming
