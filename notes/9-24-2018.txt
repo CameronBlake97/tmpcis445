@@ -1,0 +1,97 @@
+   url ->   http request
+http://google.com/O   - index.html
+protocol  ip
+
+actionor VERB
+^ get -> !xdata
+post request -> body -> [data]
+
+CRUD
+create read update delete
+
+
+
+restful API - 4
+read - get
+create - post
+delete - delete
+update - put
+
+can match database operations to resources that come out of url
+
+
+http://google.com/reviews/review
+                   callbacks    can do 4 callbacks
+            get - read review
+            post - insert record into data
+            put - wants id to do update data in database
+            delete - delete review from database
+            
+            
+http://google.com/reviews/delete/review_id
+   DO NOT WANNA DO THIS
+operation is controlled from 
+
+correct way
+http://google.com/reviews/review_id    - where or what to manipulate
+     tell it which operation by assigning a verb
+     the body is where you delete from
+     
+     
+only post/put need body
+
+
+browser sends off get requests    - only gets
+web browsers only meant to get things
+
+
+app.get("/", callback)
+app.post("/",callback)
+
+app.get("/",....
+    }).post(fu...
+    ).delete(....)      can chain together
+    
+    
+    http request
+url verbs in header
+everything else in body
+
+
+
+                                      Relational Databsases
+
+Relation vs Document Models
+        - relation focused on storage
+        - Document focuses on use
+        
+    Relational: What answers do I have?
+    Document: What questions do I have
+    
+    
+Normalazation - Create cute little nice balls   -  create a bunch of little tables 
+Denormalized - people,person, all medication in the same row     (put all together in one big table)
+
+If going to denormalize data into a big table, don't use relational use document model!
+          if need to answer questions, use Document Model
+          
+          
+          
+SEND JSON FILE BACK
+
+Postman
+   HTTP REQ
+   Body
+     {             REVIEW          modify -> put
+       "id":123;                   created -> post
+       "test":"test"
+     }
+FIND SOMETHING TO PARSE THE BODY   - PUT IN BODY PARSER          json.parse
+
+
+server.com/:userid/review
+            ^ {....}    can not enbed json in url
+            
+NO JSON BODY FOR GETS AND DELETES
+
+let o = JSON.parse(txt);    parser does this

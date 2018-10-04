@@ -1,0 +1,14 @@
+// Questions- What employees are in in [] department?
+//            Who is the [] department's manager?
+
+
+
+{
+  "_id": "<ObjectId>",
+  "departments": [
+    "dept_no": "d001",
+    "dept_name": "Research and Development",
+    "manager_no": 123, 
+    "employees": [123, ...(etc.)]
+  ]
+}

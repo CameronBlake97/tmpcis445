@@ -1,0 +1,43 @@
+name: "John Doe"
+   .
+   .
+   .
+   Addresses: ["1 Harr. Plaza Florence ...." ,                        {type: "Home"
+              ..... ,                                                  street: ...
+              .....                                                    num: ......
+   ]
+   
+   
+   
+   
+   
+   
+history of salaries - array of object in employee /salary   
+managed - array of objects     in employees
+just employee id in department's array for employees
+
+employee
+{      // Employee
+name: "Jon Doe",
+num: 123,
+...... (otherstuff)   titles, departments array in employee (vice versa), manages
+
+salaries: [{salary: 200000, from_date:"01-01-2002", to_date:"01-01-2008"},....{"etc"}],
+.......
+}
+
+Who are my employees? 
+   ^ How much do they maje now?    ]-  employee
+   ^ What are their titles?        ]-
+   
+   1. if document - just employee
+   1. if relational - have to search employee and salary
+
+
+
+document model - more stuff in one place - no need for linking
+   - better for adding stuff 
+
+
+
+
