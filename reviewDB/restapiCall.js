@@ -3,62 +3,62 @@ var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 var app = express();
 
 
-var jsonFile =    function loadJSON(callback) {   
-    
-                        var xobj = new XMLHttpRequest();
-                            xobj.overrideMimeType("application/json");
-                        xobj.open('GET', 'file.json', true); // Replace 'my_data' with the path to your file
-                        xobj.onreadystatechange = function () {
-                              if (xobj.readyState == 4 && xobj.status == "200") {
-                                
-                                function init() {
-                                loadJSON(function(response) {
-                                var actual_JSON = JSON.parse(response);
-                                });
-                                }
-                                
-                                callback(xobj.responseText);
-                              }
-                        };
-                        xobj.send(null);  
-                     }
+/*      Gives unexpected token error
+var json = 
+{ "_id": "<ObjectId>",               
+  "reviews": [ 
+    "first_name": "Andrew", 
+    "last_name": "Lawson",
+    "accountID": 123, 
+    "gender": "M", 
+    "reviewDate": "10-3-2018", 
+    "stars": 5, 
+    "verifiedPurchaser": true, 
+    "review": "Great Product! I love it." 
+  ] 
+};
+*/
 
+var json = '{ "_id": "<ObjectId>",' +
+'  "reviews": [ ' +
+'    "first_name": "Andrew", ' +              // Unexpected token :
+'    "last_name": "Lawson", ' +
+'    "accountID": 123, ' +
+'    "gender": "M", '+
+'    "reviewDate": "10-3-2018", ' +
+'    "stars": 5, ' +
+'    "verifiedPurchaser": true, ' +
+'    "review": "Great Product! I love it." ' +
+'  ] ' +
+'}; ';
+
+
+var jsonFile = JSON.parse(JSON.stringify(json));
 
 app.get('/review/:reviewid', function(request, response) {
   response.send(jsonFile);
 });
 
 app.get('/review/:n/:stars', function(request, response) {
-  response.sendfile(__dirname + "/file.json");
+  response.send(jsonFile);
 });
 
 
 app.get('/review/:n/:from_date/:to_date', function(request, response) {
-  response.sendfile(__dirname + "/file.json");
+  response.send(jsonFile);
 });
 
-/*
-app.post({
-    url: '/review/:reviewid',
-    body: (__dirname + "/file.json"),
-    json: true
-}, function (error, response, body) {
-    if (!error && response.statusCode == 200) {
-        console.log(body)
-    }
-});
-*/
 
 app.post('/review/:reviewid', function(request, response){
-    response.sendfile(__dirname + "/file.json");
+    response.send(jsonFile);
 })
 
 app.put('/review/:reviewid', function(request, response){
-    response.sendfile(__dirname + "/file.json");
+    response.send(jsonFile);
 })
 
 app.delete('/review/:reviewid', function(request, response){
-    response.sendfile(__dirname + "/file.json");
+    response.send(jsonFile);
 })
 
 app.listen(8080);
