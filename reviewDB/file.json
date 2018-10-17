@@ -1,0 +1,13 @@
+{
+  "_id": "<ObjectId>",
+  "reviews": [
+    "first_name": "Andrew",
+    "last_name": "Lawson",
+    "accountID": 123,
+    "gender": 'M',
+    "reviewDate": "10-3-2018",
+    "stars": 5,
+    "verifiedPurchaser": true,
+    "review": "Great Product! I love it."
+  ]
+}

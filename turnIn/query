@@ -1,0 +1,140 @@
+// type queries and inserts in here and then copy to mongo client
+
+
+db.students.find({
+  age : { $gt: 18 }     // Search age > 18
+});
+
+
+
+
+db.students.update(
+  {}, //what doc to update
+  { $inc : 
+    { 
+      age : 1 //set the age to 45
+    }
+  },
+  { multi: true }
+);
+
+
+
+
+db.students.update(
+  {name: "Alice"}, //what doc to update
+  { $set : 
+    { 
+      age : 31 //set the age to 41
+    }
+  }
+);
+
+
+
+
+db.students.update(
+                { $eq : {name: "Alice"}}, 
+                { $set : { grade: doc.grades } }
+);
+doc = Alicedoc;
+add(doc.grades, 100);
+
+
+
+
+db.product.find({})
+
+
+db.product.find({}).pretty()
+
+
+
+
+                          #1 on Practice 
+db.product.aggregate({
+  $project : {
+      _id : "$name",
+      Value : { $multiply : ["$qty", "$price"]}
+  }
+})
+
+
+
+                         #2 on practice????
+db.product.find(
+  {},
+  {
+  category : 1
+  }
+);
+
+
+
+                         #3 on Practice
+db.product.find(
+  {},
+  {
+  _id : 0,
+  name : 1,
+  category : 1
+  }
+);
+
+
+
+
+                        #4 on Practice
+db.product.find(
+  {},
+  {
+  category : 1,
+  company : 1
+  }
+);
+
+
+
+                         #5 on Practice
+db.product.update(                           // Only updates one at a time
+  { company: "Stanley"},
+  { $set : 
+    { 
+      company : "Stanley Black and Decker"
+    }
+  }
+);
+
+
+
+
+                         #6 on Practice
+db.product.find(
+  {
+  category : "Tools",
+  price : { $gt: 10.00}
+  },
+  {
+  _id:1
+  }
+);
+
+
+
+db.product.find({
+  company : "Stanley Black and Decker",
+  category : "Tools",
+  price : { $gt: 10.00}
+});
+
+
+
+
+                          #7 on Practice
+db.product.deleteMany(           // Will delete all products made by Crest company?
+  { company : "Crest" }
+)
+
+db.inventory.deleteOne(           // Will delete one product made by Crest company?
+  { company : "Crest" }
+)
