@@ -1,0 +1,44 @@
+project to reduce size reduces effeciency.
+if document size is large, and can reduce, need to think of projection effeciency. Can help.
+$xyz  not xyz as in word, but the value store in that    $ -> derefernces
+$$ doesn't deref from doc itself but deref from pipeline
+   - anything made in pipeline must be dereferenced with $$
+   - stuff exists in pipeline until complete, then deleted
+   
+   
+#1 from prev lecture        * some points
+  1) identify stages
+    $match
+    $project
+    
+  2) determine order         *** GET MOST POINTS FROM THIS ON EXAM - Determine order first
+    $match
+    $project
+    
+  3) Do it
+    [
+     {
+       $match : {qty : {$gte : 1 }}
+     },
+     {
+       $project : { _id: 0,                  determine fields we want, operations
+                    FullName : { $concat : ["$company", " ", "$name"]},
+                    valueOnHand : { $multiply : ["$price", "$qty"]}
+     }
+    ]
+    
+    
+    
+$group
+  - must do a operation, as we are squishing all documents into one
+  - $push allows duplicates
+  - $addtoset -> sets are unique, no duplicates
+  
+  
+$unwind
+  - must take in an arry field
+  - creates new document from each arr element
+  - kinda the reverse of group
+  - gets rid of object id    lose ability to identify documents
+  - very expensive operation, you should filter first
+  

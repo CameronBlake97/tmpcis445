@@ -1,0 +1,47 @@
+db.students.update(
+                { $gt : {age: 0}},    // updates all > 0
+                { $inc : { age : 1} }
+                { multi : true}      // needed for multiple entries
+)
+                
+                
+db.students.update(
+                { $eq : {name: "Alice"}},    // updates all > 0
+                { $set : { grade : [..., NEW]} }
+);
+
+
+db.***.find({}).pretty()
+
+
+
+*** KNOW THIS FOR EXAM
+General Wuery Principles
+  1. Reduce return set (ie filter)
+  2. Project (reshape)
+       -> math operations on each item
+          lex -> product - company
+  3. Aggregate (combine elements based on like properties)
+    (1&2 filters and proects)     ^ apply operator on each property
+  4. Changing order
+  ...  many more
+  
+  
+  
+8 total docs
+2 diff companies 
+     6 - Crest   2 - Stanely
+
+aggregate company -> 1 for each
+
+      Crest
+        6 categories - 3 different
+  
+
+SQL
+    data def language
+    Query Language - Select 
+    
+    
+    
+    
