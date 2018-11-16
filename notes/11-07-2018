@@ -1,0 +1,48 @@
+relational models are for answering EVERYTHING
+    - where document answers specific
+    
+relation - Relationship between different things or objects. Certain type of relation. 
+constraint - Restricts what you do.
+keys - Uniquely identifies one instatiation of an object over another.
+cascades - 
+
+SQL - structured query language
+        -> just an application of relational model
+        -> We are in abstract, but SQL is concrete. This is why we aren't talking aboout it.
+
+
+• Relational models are heavily based on set theory
+• Data is represented as a collection of relations
+• Relation can be visualized as a table BUT is not a table
+
+• Relation is an undorderd set of tuples
+    ○ Sets distinctness -> No duplicate tuples AT ALL
+        Will not allow duplicates, the "duplicate" just becomes the original.
+• Attributes
+    ○ Different roles or interpretations of the values that make up the tuple
+• Relation schema R
+    ○ Written R(A1, A2, ..., An)            ****** ON TEST, represent things *********
+    ○ For example:
+        ◙ STUDENT(Name, Ssn, Home__phone, Address, Office_phone, Age, Gpa)
+        ◙ Refers only to relaton schema not the tuples!
+• Attribute Ai
+    ○ Name of a role played by a domain D in the relation schema R
+    
+    ○ Can be qualified with relation R
+        ◙ R.A2 or Student.Ssn
+• Domain D
+    ○ Is a set of atomic values
+        ◙ Each value is indivisible
+    ○ Written dom(Ai)
+    ○ We can also specify data type
+    ○ Logical examples: 
+        ◙ Integers from 1-100
+        ◙ Characters in A-Z                              Name: names or characters that are put together in some order
+        ◙ SSN's follow pattern NNN-NN-NNNN               Number: XXX-XXX-XXXX  integers from 0-9
+    - domains arent tuples, just a set of things that can not be broken down
+    - with john, set of letters that are put together, but can't be broken down or not John
+• Cardinality
+    ○ Total number of possible values
+        ◙ Written | |
+    ○ For example:
+        ◙ |dom(STUDENT.Ssn)| = 1,000,000,000*

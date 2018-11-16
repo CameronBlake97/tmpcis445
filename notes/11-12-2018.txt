@@ -1,0 +1,102 @@
+const mongoClient_red-_   mongo client
+
+const url = "mongodb://omega.unasec.info"   <- 27017 (default) will auto plug in port if stays default
+
+                                               ^ Handler to db
+mongoClient.connect(__URL___, function(err, client){    // Only have a connection in this callback
+
+        if(client) --           Handling errors
+           or try catch
+        
+        express stuff
+        
+        
+    }
+);
+
+expr app
+   .get("/",function(.......
+   
+   
+   
+   
+   route.get("___"
+   
+   
+        .put
+        
+        route.get("/")
+
+
+
+                           ^ can be anything and match
+route.get("/:review/:type/:id"
+
+
+
+app.get("/"                        <- catchall at end
+    couldn't find request
+   
+   
+   
+   
+   
+   
+   
+   get random reviews by stars   /reviews/randomreviews/
+   
+   
+   
+   
+EXAM REVIEW
+
+  2. db.timelines.update(
+        {},
+        {$pop : {"tweets" : 1}
+        { multi : true}
+    )
+    
+    
+  3. db.timelines.update(
+        { user... : "lady Gaga"}
+        { $push : {tweets : { 
+                          ..... }
+                   }
+    )
+
+  4. db.timelines.remove(
+        { user.screenname : "Justin Beiber"
+    )
+    
+  6.  pipeline   way one, least effiecient (helps with #7)
+        -> unwind tweets
+        -> $group : _id : username,
+                          ___ : $sum : {tweets : 1}
+                          $first : {followers}
+                          $first : {....}
+            $sort
+
+    pipeline   way two
+        1. project
+                $sumoftwwets : {$size : "teets"}
+        2. sort
+  
+  
+  
+  db.timelines.aggregate(
+        $unwind teets
+
+
+  7. 
+    -> unwind tweets
+    -> $group : _id : username,
+                ___ : $sum : {tweets : 1}
+                $first : {followers}
+                $first : {....}
+                $avg : {"tweets.retweet_count"}
+        $sort
+
+
+    1. project
+          averageretweets: {____}
+                              ^ average array operation
