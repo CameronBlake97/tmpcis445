@@ -1,0 +1,27 @@
+1
+    SELECT birth_date, COUNT(*)  FROM employees GROUP BY birth_date ORDER BY 2 DESC LIMIT 10;
+
+
+2
+    SELECT employees.emp_no, employees.first_name, employees.last_name, salaries.salary FROM employees INNER JOIN salaries ON employees.emp_no = salaries.emp_no AND salaries.to_date > NOW()  LIMIT 10;
+    
+        or
+    
+    SELECT employees.emp_no, employees.first_name, employees.last_name, salaries.salary FROM employees LEFT JOIN salaries ON employees.emp_no = salaries.emp_no AND salaries.to_date > NOW()  LIMIT 10;
+
+
+3
+    SELECT AVG(salaries.salary) FROM employees INNER JOIN salaries ON employees.emp_no = salaries.emp_no AND salaries.to_date > NOW();
+    
+4
+    SELECT employees.emp_no, employees.first_name, employees.last_name, salaries.salary FROM employees INNER JOIN salaries ON employees.emp_no = salaries.emp_no AND salaries.to_date > NOW() WHERE salary > (SELECT AVG(salaries.salary) FROM employees INNER JOIN salaries ON employees.emp_no = salaries.emp_no AND salaries.to_date > NOW()) ORDER BY salary, emp_no LIMIT 10;
+    
+5
+    SELECT employees.emp_no, employees.first_name, employees.last_name, departments.dept_name, salaries.salary FROM employees INNER JOIN salaries ON employees.emp_no = salaries.emp_no AND salaries.to_date > NOW() LEFT JOIN dept_emp ON employees.emp_no = dept_emp.emp_no AND dept_emp.to_date > NOW() LEFT JOIN departments ON dept_emp.dept_no = departments.dept_no  LIMIT 20;
+    
+        or
+   
+    SELECT employees.emp_no, employees.first_name, employees.last_name, departments.dept_name, salaries.salary FROM employees LEFT JOIN salaries ON employees.emp_no = salaries.emp_no AND salaries.to_date > NOW() LEFT JOIN dept_emp ON employees.emp_no = dept_emp.emp_no AND dept_emp.to_date > NOW() LEFT JOIN departments ON dept_emp.dept_no = departments.dept_no  LIMIT 20;
+
+6
+    SELECT departments.dept_name, AVG(salaries.salary) FROM employees INNER JOIN salaries ON employees.emp_no = salaries.emp_no AND salaries.to_date > NOW() LEFT JOIN dept_emp ON employees.emp_no = dept_emp.emp_no AND dept_emp.to_date > NOW() LEFT JOIN departments ON dept_emp.dept_no = departments.dept_no  GROUP BY dept_name ORDER BY 2 ASC;    

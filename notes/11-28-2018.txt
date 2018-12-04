@@ -1,0 +1,4 @@
+4.
+    WHERE __ (End>NOW) AND __ (Start<NOW) AND Salaries.salary > (same as 3)   LIMIT 5000
+          ^                ^
+            Current salary
