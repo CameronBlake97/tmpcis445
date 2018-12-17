@@ -1,0 +1,17 @@
+#1
+    
+SELECT customer.name, SUM(account.balance) AS totalBalance FROM customer INNER JOIN account ON customer.id = account.ownedBy GROUP BY name ORDER BY 2 DESC;
+
+
+#2
+
+SELECT AVG(account.balance) AS avgAccountBalance FROM account;
+
+#3
+
+SELECT customer.name, SUM(account.balance) AS balance FROM customer INNER JOIN account ON customer.id = account.ownedBy WHERE balance > (SELECT AVG(account.balance) FROM account) GROUP BY name ORDER BY 2 DESC;
+
+
+#4
+
+SELECT customer.name, COUNT(account.id) AS numAccounts FROM customer LEFT JOIN account ON customer.id = account.ownedBy GROUP BY name ORDER BY numAccounts DESC, name;

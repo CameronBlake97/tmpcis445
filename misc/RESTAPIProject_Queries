@@ -1,0 +1,182 @@
+// Gives number of reviews per product
+db.reviews.aggregate([
+    { $limit: 1000},
+    {
+       $group : {
+            _id : "$product.title",
+            count : {$sum : 1},
+        }
+    },
+    { $sort : { count : -1} }
+])
+    
+    
+// Shows one document
+db.reviews.find().limit(1).pretty()
+    
+    
+    
+    
+    
+    db.reviews.aggregate([
+    {
+        $project : {
+            _id : 0,
+            product : 1,
+        }
+    
+    },
+    {
+        $unwind : "$product"
+    },
+    {
+        $match : {
+            "product.id" : {$eq : "B00RUX59IS" }
+        }
+    },
+    { $limit : 10}
+])
+    
+    
+    
+db.reviews.aggregate([
+    {
+        $project : {
+            _id : 0,
+            "product.title" : 1
+        }
+    },
+    { $limit : 25000000}
+]).pretty()
+    
+    
+
+    
+
+// Gives descending number of helpfulvotes per product from first 1000 reviews 
+db.reviews.aggregate([
+    { $limit : 1000 },
+    {
+       $group : {
+            _id : "$product.title",
+            averageHelpfulVotes : {$sum : "$votes.helpful_votes"},
+        }
+    },
+    { $sort : { averageHelpfulVotes : -1} },
+])
+
+
+
+db.reviews.find({ "review.id" : reviewid })
+
+
+
+db.reviews.aggregate([
+    { $limit : 10},
+    { $project : {
+                    marketplace : 1,
+                    review : 1
+                 }
+    },
+    { $match : { "review.star_rating" : 5 } }
+])
+        
+
+
+
+db.collection("reviews").aggregate([
+            { $limit : 1},
+            { $project : {
+                    marketplace : 1,
+                    review : 1
+                }
+            },
+            { $match : { "review.star_rating" : 5 } }
+]).toArray(function(err, results) {
+                            if (err) throw err
+                            console.log("DONE!")
+                            response.send(JSON.stringify(results))
+                        })
+
+
+
+
+
+
+
+db.collection("reviews").find({"review.star_rating" : "4"}).limit(1).skip(3)
+ 
+ 
+ 
+ 
+ 
+ 
+db.reviews.aggregate([ 
+        { $sample: { size: 3 } },
+        { $match:  {"review.star_rating": 1}}
+])
+
+
+
+
+app.get('/review/:reviewid', function(request, response) {
+    request.setTimeout(50000000)
+    console.log("Made it here")
+    
+    db.collection("reviews").aggregate({ $match : { "review.id" : request.params.reviewid}}).toArray(function(err, results) {
+      if (err) throw err     // return console.log(err)
+      console.log(JSON.stringify(results))
+      response.send(JSON.stringify(results))
+    })
+})
+
+
+
+
+// Gets the newest added document
+db.collection.find().limit(1).sort({$natural:-1}).pretty()
+ 
+ 
+ 
+ 
+
+// Can you this to build the resposne and send it 
+for(var i = 0; i < results.length; i++) {
+    response.write(JSON.stringify(results[i]));
+}
+response.end()
+
+
+
+
+
+
+/*
+  //502 Bad Gateway error
+  app.get('/review/:reviewid', function(request, response) {
+    request.setTimeout(50000000000)
+    db.collection("reviews").find({ "review.id" : request.params.reviewid}).limit(1).toArray(function(err, results) {
+      if (err) throw err     // return console.log(err)
+      console.log(JSON.stringify(results))
+      response.send(JSON.stringify(results))
+    })
+  })
+*/
+
+
+
+
+/*
+  app.get('/review/randomreview/:n/:stars', function(request, response) {
+    var n = parseInt(request.params.n)
+    var stars = parseInt(request.params.stars)
+    
+    var size = db.collection("reviews").count()
+    var rand = Math.floor(Math.random() * size)
+    
+    db.collection("reviews").find({"review.star_rating" : stars}).limit(n).skip(rand).toArray(function(err, results) {
+        if (err) throw err     // return console.log(err)
+        response.send(JSON.stringify(results))
+    })
+  })  
+*/

@@ -1,0 +1,208 @@
+    db.employees.aggregate([
+        {
+            $project : {
+                _id : 0,
+                emp_no : 1,
+                first_name : 1,
+                last_name : 1,
+            }
+        
+        },   
+        {
+            $match : {
+                salaries : {
+                    $elemMatch : {
+                        to_date : { $gte : new Date() }
+                    }
+                }
+            }
+        },
+        { $sort : { "emp_no" : 1} },
+        { $limit : 10}
+    ]).pretty()
+    
+    
+    
+    
+    
+    
+            db.employees.aggregate([
+        {
+            $project : {
+                _id : 0,
+                emp_no : 1,
+                first_name : 1,
+                last_name : 1,
+            }
+        
+        },   
+        {
+            $match : {
+                salaries : {
+                    to_date: {
+                          $gte : "new Date()"
+                    }
+                }
+            }
+        },
+        { $sort : { "emp_no" : 1} },
+        { $limit : 10}
+    ]).pretty()
+    
+    
+    
+
+    
+        db.employees.aggregate([
+        {
+            $project : {
+                _id : 0,
+                emp_no : 1,
+                first_name : 1,
+                last_name : 1,
+                salaries : 1
+            }
+        
+        },   
+        {
+            $match : {
+                salaries : {
+                        to_date : { $gte : new Date() }
+                }
+            }
+        },
+        { $sort : { "emp_no" : 1} },
+        { $limit : 10}
+    ]).pretty()
+    
+    
+      
+                             // WORKS (NAME MIGHT BE MISSPELLED)
+            db.employees.aggregate([
+        {
+            $project : {
+                _id : 0,
+                emp_no : 1,
+                first_name : 1,
+                last_name : 1,
+            }
+        
+        },  
+        {
+            $match : {
+                first_name : "Georgi"
+            }
+        },
+        { $sort : { "emp_no" : 1} },
+        { $limit : 10}
+    ]).pretty()
+    
+    
+    
+    
+                       // WORKS    doesn't filter salaries, just adds all if one fits criteria
+        db.employees.aggregate([
+        {
+            $project : {
+                _id : 0,
+                emp_no : 1,
+                first_name : 1,
+                last_name : 1,
+                salaries : 1
+            }
+        
+        },   
+        {
+            $match : {
+                salaries : {
+                    $elemMatch : {
+                        to_date : { $lt : ISODate("1986-06-26T04:00:00Z") }
+                    }
+                }
+            }
+        },
+        { $sort : { "emp_no" : 1} },
+        { $limit : 2}
+    ]).pretty()
+    
+    
+    
+        db.employees.aggregate([
+        {
+            $project : {
+                _id : 0,
+                emp_no : 1,
+                first_name : 1,
+                last_name : 1,
+                salaries : 1
+            }
+        
+        },   
+        {
+            $match : {
+                salaries : {
+                        to_date : { $gte : new Date() }
+                }
+            }
+        },
+        { $sort : { "emp_no" : 1} },
+        { $limit : 2}
+    ]).pretty()
+    
+    
+                                          // WORKS
+    
+            db.employees.aggregate([
+        {
+            $project : {
+                _id : 0,
+                emp_no : 1,
+                first_name : 1,
+                last_name : 1,
+                salaries : {
+                    $filter : {
+                        input: "$salaries",
+                        as : "salary",
+                        cond : { $gte : [ "$$salary.to_date" , new Date() ]}
+                    }
+                }
+            }
+        },
+        { $sort : { "emp_no" : 1} },
+        { $limit : 10}
+    ]).pretty()
+    
+    
+    
+                                
+            db.employees.aggregate([
+        {
+            $project : {
+                _id : 0,
+                emp_no : 1,
+                first_name : 1,
+                last_name : 1,
+                salaries : 1
+            }
+        
+        },   
+        {
+            $match : {
+                "salaries.to_date" : {$gte : new Date() }
+            }
+        },
+        { $sort : { "emp_no" : 1} },
+        { $limit : 2}
+    ]).pretty()
+
+
+
+
+
+
+
+
+
+
+
+

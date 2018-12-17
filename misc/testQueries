@@ -1,0 +1,197 @@
+#1
+
+    db.timelines.insert(
+        {
+        "user_id" : 155659213,
+        "user_name" : "Cristiano Ronaldo",
+        "user_screen_name" : "Cristiano",
+        "user_location" : "Turim, Piemonte",
+        "user_description" : "This Privacy Policy addresses the collection and use of personal information - https://t.co/Jp6yh1T58c",
+        "user_followers_count" : 75718626,
+        "user_friends_count" : 98,
+        "user_account_created_at" : "Mon Jun 14 19:09:20 +0000 2010",
+        "tweets" : [
+                {
+                        "created_at" : "Wed Oct 31 09:39:44 +0000 2018",
+                        "id" : 1057567788330635300,
+                        "text" : "Happy Halloween to everyone!!🎃👻 https://t.co/0x8sPgSHht",
+                        "source" : "Twitter for iPhone",
+                        "retweet_count" : 11026,
+                        "favorite_count" : 89994,
+                        "lang" : "en"
+                },
+                {
+                        "created_at" : "Mon Oct 29 19:21:25 +0000 2018",
+                        "id" : 1056989397973905400,
+                        "text" : "Can you guess where am I?#pestanacr7 #cr7 @PestanaCR7 https://t.co/ilWCjCZ6Qi",
+                        "source" : "Twitter for iPhone",
+                        "retweet_count" : 5810,
+                        "favorite_count" : 81012,
+                        "lang" : "en"
+                },
+                {
+                        "created_at" : "Mon Oct 29 14:06:39 +0000 2018",
+                        "id" : 1056910186131152900,
+                        "text" : "👌👍 https://t.co/xul4qdmS55",
+                        "source" : "Twitter for iPhone",
+                        "retweet_count" : 14456,
+                        "favorite_count" : 207992,
+                        "lang" : "und"
+                },
+                {
+                        "created_at" : "Sat Oct 27 19:13:11 +0000 2018",
+                        "id" : 1056262552534110200,
+                        "text" : "Uno per tutti, tutti per uno! #finoallafine https://t.co/LY0YHlM96o",
+                        "source" : "Twitter for iPhone",
+                        "retweet_count" : 25660,
+                        "favorite_count" : 201571,
+                        "lang" : "it"
+                },
+                {
+                        "created_at" : "Wed Oct 24 09:14:53 +0000 2018",
+                        "id" : 1055024819396399100,
+                        "text" : "A great coach and above all a wonderful man. Taught me so many things inside and outside the pitch. Great to see yo… https://t.co/vHuuRtslaB",
+                        "source" : "Twitter for iPhone",
+                        "retweet_count" : 63021,
+                        "favorite_count" : 414669,
+                        "lang" : "en"
+                },
+                {
+                        "created_at" : "Mon Oct 22 20:00:36 +0000 2018",
+                        "id" : 1054462547590549500,
+                        "text" : "Thanks for the warm welcome. Always feel at home here. https://t.co/Tr5gny5Z5A",
+                        "source" : "Twitter for iPhone",
+                        "retweet_count" : 71567,
+                        "favorite_count" : 379730,
+                        "lang" : "en"
+                },
+                {
+                        "created_at" : "Sat Oct 20 22:26:28 +0000 2018",
+                        "id" : 1053774478562484200,
+                        "text" : "Ogni partita insegna qualcosa...ora concentrati sulla prossima.💪🏽#finoallafine https://t.co/HkBb9tWnMv",
+                        "source" : "Twitter for iPhone",
+                        "retweet_count" : 9332,
+                        "favorite_count" : 113510,
+                        "lang" : "it"
+                },
+                {
+                        "created_at" : "Thu Oct 18 16:48:46 +0000 2018",
+                        "id" : 1052964717155766300,
+                        "text" : "👍 https://t.co/MRulQXg9va",
+                        "source" : "Twitter for iPhone",
+                        "retweet_count" : 11564,
+                        "favorite_count" : 166461,
+                        "lang" : "und"
+                },
+                {
+                        "created_at" : "Wed Oct 17 17:56:21 +0000 2018",
+                        "id" : 1052619338866417700,
+                        "text" : "So happy for my island! Vote for Madeira, for sure the best island in the world!!\n\nVote here:… https://t.co/EdhBw4KCDz",
+                        "source" : "Twitter for iPhone",
+                        "retweet_count" : 4906,
+                        "favorite_count" : 52829,
+                        "lang" : "en"
+                }
+        ]
+        }
+    )
+    
+    
+    
+    
+    
+    
+    
+#2
+
+    db.timelines.update(
+        {
+        },
+        {
+            $pop : {tweets : 1}   // Given that the oldest is always last in array
+        },
+        {
+            multi : true
+        }
+    )
+
+
+
+#3
+
+    db.timelines.update(
+        {
+            user_screen_name : 'ladygaga'
+        },
+        {
+            $push : {tweets :  {
+                        "created_at" : "Wed Oct 31 10:05:44 +0000 2018",
+                        "id" : 881000969182146600,
+                        "text" : "I decided to quit performing and take Advance Database at UNA.",
+                        "source" : 'UNA Advance Database App',
+                        "retweet_count" : 0,
+                        "favorite_count" : 0,
+                        "lang" : 'en',
+                                }
+                     }
+        }
+    )
+    
+    
+    
+#4
+
+    db.timelines.aggregate([
+        {
+            $project : {
+                _id : 0,
+                user_name : 1,
+                user_screen_name : 1,
+                user_friends_count : 1
+            }
+        },
+        { $sort : { "user_friends_count" : -1} }
+    ])
+    
+    
+    
+#5
+    db.timelines.remove( { user_name : "Justin Bieber" } )  // Deletes all documents that match the filter
+    
+    
+    
+
+#6
+    db.timelines.aggregate([
+      {
+         $project: {
+            _id : 0,
+            user_name : 1,
+            user_screen_name : 1,
+            user_followers_count : 1,
+            user_friends_count : 1,
+            numberoftweets: { $size : "$tweets" }
+         }
+      },
+      { $sort : { "numberoftweets" : -1} }
+   ])
+   
+   
+   
+   
+#7 
+
+    db.timelines.aggregate([
+      {
+         $project: {
+            _id : 0,
+            user_name : 1,
+            user_screen_name : 1,
+            user_followers_count : 1,
+            user_friends_count : 1,
+            numberoftweets: { $size : "$tweets" },
+            retweetAverage : { $avg : {$divide : ["$retweet_count" , numberoftweets]}
+         }
+      },
+      { $sort : { "reweetAverage" : -1} }
+   ]) 

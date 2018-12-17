@@ -1,0 +1,117 @@
+#1
+CREATE VIEW onHandProductValues AS SELECT * FROM Product WHERE qty > 0; 
+		Output
+		Query OK, 0 rows affected (0.00 sec) 
+		                   Showing the View
+			   SELECT * FROM `onHandProductValues`;
+				Output
+				+----+-----------------------+-----+-------+---------+----------+
+				| id | name                  | qty | price | company | category |
+				+----+-----------------------+-----+-------+---------+----------+
+				|  1 | Batman 
+				Lego Set      |   1 |  9.99 |       1 |        1 |
+				|  2 | 32 Piece 
+				Ratchet Set |   2 | 29.99 |       3 |        2 |
+				|  3 | Hammer                |   5 |  5.99 |       3 |        2 |
+				|  4 | Toothpaste            |   1 |  2.99 |       4 |        3 |
+				|  6 | Power 
+				Drill          |   5 | 49.99 |    NULL |        2 |
+				|  7 | 120 
+				Piece Lego Set   |   1 | 12.99 |       1 |     NULL |
+				|  8 | Hot-
+				wheels Car       |  10 |  0.99 |    NULL |     NULL |
+				+----+-----------------------+-----+-------+---------+----------+
+
+#2
+SELECT Product.`name` AS `product name`, Category.`name` AS `category`  FROM `Product` LEFT JOIN `Category` ON Product.`category` = Category.`id`; 
+	Output         (Assuming you want the products with NULL category, use "INNER JOIN" otherwise)
+	+-----------------------+----------+
+	| product name          | category |
+	+-----------------------+----------+
+	| Batman 
+	Lego Set      | Toys     |
+	| 32 Piece 
+	Ratchet Set | Tools    |
+	| Hammer                | Tools    |
+	| Toothpaste            | Health   |
+	| Floss                 | Health   |
+	| Power 
+	Drill          | Tools    |
+	| 120 
+	Piece Lego Set   | NULL     |
+	| Hot-
+	wheels Car       | NULL     |
+	+-----------------------+----------+
+   
+#3        (Same as #2?)
+
+
+#4
+SELECT Product.`name` AS `product name`, Category.`name` AS `category`, Company.`name` as `company` FROM `Product` LEFT JOIN `Category` ON Product.`category` = Category.`id` LEFT JOIN `Company` ON Product.`company` = Company.`id`;
+	Output
+	+-----------------------+----------+---------+
+	| product name          | category | company |
+	+-----------------------+----------+---------+
+	| Batman 
+	Lego Set      | Toys     | LEGO    |
+	| 32 Piece 
+	Ratchet Set | Tools    | Stanley |
+	| Hammer                | Tools    | Stanley |
+	| Toothpaste            | Health   | Crest   |
+	| Floss                 | Health   | Crest   |
+	| Power 
+	Drill          | Tools    | NULL    |
+	| 120 
+	Piece Lego Set   | NULL     | LEGO    |
+	| Hot-
+	wheels Car       | NULL     | NULL    |
+	+-----------------------+----------+---------+
+B)
+UPDATE `Company` SET `name` = "Stanley Black and Decker" WHERE `name` = "Stanley";
+	Output of Rerun
+	+-----------------------+----------+--------------------------+
+	| product name          | category | company                  |
+	+-----------------------+----------+--------------------------+
+	| Batman 
+	Lego Set      | Toys     | LEGO                     |
+	| 32 Piece 
+	Ratchet Set | Tools    | Stanley Black and Decker |
+	| Hammer                | Tools    | Stanley Black and Decker |
+	| Toothpaste            | Health   | Crest                    |
+	| Floss                 | Health   | Crest                    |
+	| Power 
+	Drill          | Tools    | NULL                     |
+	| 120 
+	Piece Lego Set   | NULL     | LEGO                     |
+	| Hot-
+	wheels Car       | NULL     | NULL                     |
+	+-----------------------+----------+--------------------------+
+
+#5      (Might have done more than you wanted)
+SELECT Product.`name` AS `product name`, Product.`qty` ,Product.`price`, Company.`name` AS `company`,  Category.`name` AS `category` FROM `Product` INNER JOIN `Category` ON Product.`category` = Category.`id` AND Category.`name`="Tools" AND Product.`price` > 10 LEFT JOIN `Company` ON Product.`company` = Company.`id`;
+	Output
+	+-----------------------+-----+-------+--------------------------+----------+
+	| product name          | qty | price | company                  | category |
+	+-----------------------+-----+-------+--------------------------+----------+
+	| 32 Piece 
+	Ratchet Set |   2 | 29.99 | Stanley Black and Decker | Tools    |
+	| Power 
+	Drill          |   5 | 49.99 | NULL                     | Tools    |
+	+-----------------------+-----+-------+--------------------------+----------+
+
+B)
+SELECT Product.`name` AS `product name`, Product.`qty` ,Product.`price`, Company.`name` AS `company`,  Category.`name` AS `category` FROM `Product` INNER JOIN `Category` ON Product.`category` = Category.`id` AND Category.`name`="Tools" AND Product.`price` > 10 INNER JOIN `Company` ON Product.`company` = Company.`id` AND Company.`name` = "Stanley Black and Decker";
+	Output of Rerun
+	+-----------------------+-----+-------+--------------------------+----------+
+	| product name          | qty | price | company                  | category |
+	+-----------------------+-----+-------+--------------------------+----------+
+	| 32 Piece 
+	Ratchet Set |   2 | 29.99 | Stanley Black and Decker | Tools    |
+	+-----------------------+-----+-------+--------------------------+----------+
+
+
+
+
+
+
+SELECT Company.`Name` FROM `Company` LEFT JOIN `Product` ON Company.`id` = Product.`Company` UNION SELECT AVG(Product.`price` FROM `Product` LEFT JOIN `Company`;
